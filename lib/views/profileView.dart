@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:send_music/util/colors.dart';
 import 'package:send_music/util/dimensions.dart';
-import 'package:send_music/widgets/navBar.dart';
 import 'package:send_music/widgets/profileInfoField.dart';
 import 'package:send_music/widgets/listSongCard.dart';
+import 'package:send_music/widgets/gridSongCard.dart';
 
-
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class ProfileView extends StatefulWidget {
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<ProfileView> createState() => _ProfileViewState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> with TickerProviderStateMixin{
+class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin{
   late TabController _tabController;
   final List<String> songNames = <String>['Master Of Puppets','Wish You Were Here', 'Gates Of Babylon','Duel Of Fate','Yürekten','November Rain','Tek Gecelik','Bohemian Rhapsody', 'Jocelyn Flores'];
   final List<String> artistNames = <String>['Metallica','Pink Floyd','Rainbow','John Williams','Duman',"Guns N' Roses","Hayko Cepkin","Queen","XXXTENTACION"];
@@ -32,21 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primaryDark,
-      appBar: AppBar(
-        title: const Text('Vikashi Vini'),
-        centerTitle:  true,
-        backgroundColor: AppColors.primaryDark,
-        actions: [
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) => [
-              const PopupMenuItem(child: Icon(Icons.favorite, color: AppColors.primaryLight,),)
-            ],
-          ),
-        ],
-      ),
-      body: Center(
+    return Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -95,6 +79,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> with TickerProvider
               ),
               Expanded(
                 child: Scaffold(
+                  backgroundColor: AppColors.primaryDark,
                   appBar: AppBar(
                     backgroundColor: AppColors.primaryDark,
                     title: TabBar(
@@ -116,16 +101,43 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> with TickerProvider
                     children: [
                       GridView.count(
                           crossAxisCount: 3,
-                          children:[
-                            Container(child: const Center(child:Text('1')), color: Colors.blue,),
-                            Container(child: const Center(child:Text('2')), color: Colors.red,),
-                            Container(child: const Center(child:Text('3')), color: Colors.green,),
-                            Container(child: const Center(child:Text('4')), color: Colors.red,),
-                            Container(child: const Center(child:Text('5')), color: Colors.green,),
-                            Container(child: const Center(child:Text('6')), color: Colors.blue,),
-                            Container(child: const Center(child:Text('7')), color: Colors.green,),
-                            Container(child: const Center(child:Text('8')), color: Colors.blue,),
-                            Container(child: const Center(child:Text('9')), color: Colors.red,),
+                          children: const [
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Master Of Puppets',
+                                artist: 'Metallica'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Wish You Were Here',
+                                artist: 'Pink Floyd'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Gates Of Babylon',
+                                artist: 'Rainbow'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Duel Of Fate',
+                                artist: 'John Williams'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Yürekten',
+                                artist: 'Duman'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'November Rain',
+                                artist: 'Guns N\'Roses'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Tek Gecelik',
+                                artist: 'Hayko Cepkin'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Bohemian Rhapsody',
+                                artist: 'Queen'),
+                            GridSongCard(
+                                image: 'https://picsum.photos/250?image=9',
+                                name: 'Jocelyn Flores',
+                                artist: 'XXXTENTACION'),
                           ]),
                       //Container(child: Icon(Icons.directions_car), color: Colors.blue,),
                       ListView.separated(
@@ -144,9 +156,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> with TickerProvider
             ],
           ),
 
-        ),
-
-      bottomNavigationBar: const NavBar(),
-    );
+        );
   }
 }
